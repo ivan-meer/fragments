@@ -1,18 +1,38 @@
-# This is a config for E2B sandbox template.
-# You can use 'template_id' (scwxnhs1apt5uj7na7db) or 'template_name (nextjs-developer) from this config to spawn a sandbox:
+# Конфигурация шаблона nextjs-developer для E2B Sandbox
+# Используйте template_id или template_name для создания sandbox:
 
-# Python SDK
+# Python SDK примеры:
 # from e2b import Sandbox
-# sandbox = Sandbox(template='nextjs-developer')
+# sandbox = Sandbox(template='nextjs-developer')  # Синхронный sandbox
+# sandbox = await AsyncSandbox.create(template='nextjs-developer')  # Асинхронный sandbox
 
-# JS SDK
+# JS/TS SDK примеры:
 # import { Sandbox } from 'e2b'
 # const sandbox = await Sandbox.create({ template: 'nextjs-developer' })
 
+# Уникальный идентификатор шаблона (обязательный параметр)
 template_id = "scwxnhs1apt5uj7na7db"
+
+# Название шаблона (должно совпадать с именем директории)
+template_name = "nextjs-developer"  
+
+# Путь к Dockerfile относительно этой конфигурации
 dockerfile = "e2b.Dockerfile"
-template_name = "nextjs-developer"
+
+# Команда запуска приложения (выполняется при старте sandbox)
 start_cmd = "/compile_page.sh"
-cpu_count = 4
-memory_mb = 4_096
-team_id = "460355b3-4f64-48f9-9a16-4442817f79f5"
+
+# Healthcheck для проверки работоспособности приложения
+# Проверяет наличие процесса npm каждые 30 секунд
+[healthcheck]
+cmd = "pgrep npm && curl -f http://localhost:3000/api/health"
+interval = 5  # Проверка каждые 5 секунд
+timeout = 15   # Увеличенный таймаут
+retries = 10   # Больше попыток
+
+# Ресурсы выделяемые sandbox (по умолчанию 4 CPU и 4GB RAM)
+cpu_count = 4      # Количество CPU ядер
+memory_mb = 4_096  # Объем памяти в MB
+
+# Идентификатор команды (не изменять)
+team_id = "6083f2ec-2289-4ce2-9aae-1d84331e0c85"

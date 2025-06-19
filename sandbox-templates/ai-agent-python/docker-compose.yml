@@ -1,0 +1,14 @@
+services:
+  ai-agent:
+    build:
+      context: .
+      dockerfile: e2b.Dockerfile
+    ports:
+      - "8000:8000"
+    environment:
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY} 
+      - MISTRAL_API_KEY=${MISTRAL_API_KEY}
+      - GROQ_API_KEY=${GROQ_API_KEY}
+      - LLM_PROVIDER=${LLM_PROVIDER:-openai}
+    restart: unless-stopped

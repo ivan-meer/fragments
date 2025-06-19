@@ -1,0 +1,23 @@
+# Уникальный идентификатор шаблона
+template_id = "pyaiagt1q2w3e4r5t6y7u"
+
+# Название шаблона (должно совпадать с именем директории)
+template_name = "ai-agent-python"
+
+# Описание шаблона
+description = "FastAPI-based AI agent with terminal dashboard"
+
+# Путь к Dockerfile
+dockerfile = "e2b.Dockerfile"
+
+# Основной файл приложения
+file = "agent.py"
+
+# Порт приложения
+port = 8000
+
+# Зависимости Python
+dependencies = ["torch", "langchain", "openai", "transformers", "sentence-transformers"]
+
+# Идентификатор команды
+team_id = "6083f2ec-2289-4ce2-9aae-1d84331e0c85"

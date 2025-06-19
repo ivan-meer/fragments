@@ -1,0 +1,8 @@
+# This is a config for E2B sandbox template.
+dockerfile = "e2b.Dockerfile"
+template_name = "r7gjwwzi8z9x5ezdjky8"
+template_id = "r7gjwwzi8z9x5ezdjky8"
+start_cmd = "cd /home/user && python -u app.py"
+cpu_count = 4
+memory_mb = 4_096
+team_id = "6083f2ec-2289-4ce2-9aae-1d84331e0c85"

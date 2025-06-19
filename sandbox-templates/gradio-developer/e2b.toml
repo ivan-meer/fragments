@@ -15,4 +15,4 @@ template_name = "gradio-developer"
 start_cmd = "cd /home/user && gradio app.py"
 cpu_count = 4
 memory_mb = 4_096
-team_id = "460355b3-4f64-48f9-9a16-4442817f79f5"
+team_id = "6083f2ec-2289-4ce2-9aae-1d84331e0c85"

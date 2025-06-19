@@ -62,6 +62,10 @@ export async function POST(req: Request) {
   const modelClient = getModelClient(model, config)
 
   try {
+    console.log('Creating stream with model:', model)
+    console.log('Template keys:', Object.keys(template))
+    console.log('System prompt length:', toPrompt(template).length)
+    
     const stream = await streamObject({
       model: modelClient as LanguageModel,
       schema,
@@ -108,6 +112,23 @@ export async function POST(req: Request) {
     }
 
     console.error('Error:', error)
+    console.error('Error message:', error.message)
+    console.error('Error cause:', error.cause)
+
+    const isTimeoutError = error && (
+      error.message.includes('timeout') || 
+      error.message.includes('Timeout') ||
+      error.code === 'UND_ERR_CONNECT_TIMEOUT'
+    )
+
+    if (isTimeoutError) {
+      return new Response(
+        'API request timed out. Please try switching to a different model (Claude recommended) or try again later.',
+        {
+          status: 408,
+        },
+      )
+    }
 
     return new Response(
       'An unexpected error has occurred. Please try again later.',

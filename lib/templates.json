@@ -1,24 +1,32 @@
 {
+  "ai-agent-python": {
+    "name": "Python AI Agent",
+    "lib": ["fastapi", "langchain", "rich", "uvicorn"],
+    "file": "agent.py",
+    "instructions": "Create FastAPI-based AI agents with LangChain integration. Use for chatbots, AI assistants, conversation handlers, and interactive AI services. Includes rich console output and terminal dashboard. Always use uvicorn.run() with host='0.0.0.0' and port=8000.",
+    "port": 8000,
+    "ready_cmd": "curl -f http://localhost:8000 || exit 1"
+  },
   "code-interpreter-v1": {
-    "name": "Python data analyst",
+    "name": "Python Code Interpreter",
     "lib": ["python", "jupyter", "numpy", "pandas", "matplotlib", "seaborn", "plotly"],
     "file": "script.py",
-    "instructions": "Runs code as a Jupyter notebook cell. Strong data analysis angle. Can use complex visualisation to explain results.",
+    "instructions": "Execute Python code for data analysis, calculations, and visualizations. Use for data processing, statistical analysis, machine learning experiments, and generating charts/graphs. Code runs as Jupyter notebook cells with rich output display. No web server required.",
     "port": null
   },
   "nextjs-developer": {
-    "name": "Next.js developer",
+    "name": "Next.js Developer",
     "lib": ["nextjs@14.2.5", "typescript", "@types/node", "@types/react", "@types/react-dom", "postcss", "tailwindcss", "shadcn"],
     "file": "pages/index.tsx",
-    "instructions": "A Next.js 13+ app that reloads automatically. Using the pages router.",
+    "instructions": "Build full-stack React applications with Next.js 14+. Use for web apps, landing pages, dashboards, and interactive frontend applications. Supports TypeScript, Tailwind CSS, and modern React patterns. Uses pages router by default. Server runs on port 3000 with hot reload.",
     "port": 3000
   },
   "vue-developer": {
-    "name": "Vue.js developer",
+    "name": "Vue.js Developer",
     "lib": ["vue@latest", "nuxt@3.13.0", "tailwindcss"],
     "file": "app.vue",
-    "instructions": "A Vue.js 3+ app that reloads automatically. Only when asked specifically for a Vue app.",
-    "port": 3000
+    "instructions": "Create modern Vue.js 3 applications with Nuxt 3 framework. Use for SPAs, progressive web apps, and modern frontend applications. Supports Composition API, TypeScript, and Tailwind CSS. Server runs on port 3001 with hot module replacement. Only use when specifically requested for Vue/Nuxt projects.",
+    "port": 3001
   },
   "streamlit-developer": {
     "name": "Streamlit developer",
@@ -49,5 +57,13 @@
     "file": "app.py",
     "instructions": "A gradio app. Gradio Blocks/Interface should be called demo.",
     "port": 7860
+  },
+  "r7gjwwzi8z9x5ezdjky8": {
+    "name": "Custom Flask App",
+    "lib": ["flask", "gunicorn"],
+    "file": "app.py",
+    "instructions": "A lightweight Flask web application for REST APIs, microservices, or simple web backends. Use for custom Python web services that don't fit other templates.",
+    "port": 5000,
+    "ready_cmd": "curl -f http://localhost:5000 || exit 1"
   }
 }

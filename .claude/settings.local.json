@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(chmod:*)",
+      "Bash(ls:*)",
+      "Bash(e2b template:*)",
+      "Bash(rm:*)",
+      "Bash(grep:*)"
+    ],
+    "deny": []
+  }
+}

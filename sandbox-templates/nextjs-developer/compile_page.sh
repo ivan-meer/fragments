@@ -18,5 +18,15 @@ function ping_server() {
 	done
 }
 
-ping_server &
+# Добавляем проверку готовности API
+wait_for_server() {
+  for i in {1..10}; do
+    curl -f http://localhost:3000/api/ready && return 0
+    sleep $((i*i))
+  done
+  return 1
+}
+
+# Запускаем проверку перед стартом
+wait_for_server || exit 1
 cd /home/user && npx next --turbo

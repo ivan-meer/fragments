@@ -209,7 +209,7 @@ export function ChatInput({
                 <Tooltip delayDuration={0}>
                   <TooltipTrigger asChild>
                     <Button
-                      disabled={!isMultiModal || isErrored}
+                      disabled={Boolean(!isMultiModal || isErrored)}
                       type="button"
                       variant="outline"
                       size="icon"
@@ -233,7 +233,7 @@ export function ChatInput({
                   <Tooltip delayDuration={0}>
                     <TooltipTrigger asChild>
                       <Button
-                        disabled={isErrored}
+                        disabled={Boolean(isErrored)}
                         variant="default"
                         size="icon"
                         type="submit"

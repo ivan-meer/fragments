@@ -65,5 +65,21 @@
     "instructions": "A lightweight Flask web application for REST APIs, microservices, or simple web backends. Use for custom Python web services that don't fit other templates.",
     "port": 5000,
     "ready_cmd": "curl -f http://localhost:5000 || exit 1"
+  },
+  "mlops-fastapi": {
+    "name": "MLOps FastAPI",
+    "lib": ["fastapi", "uvicorn", "mlflow", "dvc", "evidently", "scikit-learn", "pandas", "numpy", "structlog"],
+    "file": "app.py",
+    "instructions": "🤖 Build production-ready ML model deployment APIs with comprehensive MLOps capabilities. Use for: ML model serving, experiment tracking with MLflow, data pipeline management with DVC, model monitoring with Evidently, data drift detection, and automated model retraining. Includes structured logging, health checks, and Prometheus metrics. Perfect for deploying trained models as REST APIs with monitoring and observability. Server runs on port 8080 with automatic reload and comprehensive error handling.",
+    "port": 8080,
+    "ready_cmd": "curl -f http://localhost:8080/health || exit 1"
+  },
+  "react-native-expo": {
+    "name": "React Native Expo",
+    "lib": ["expo", "react-native", "typescript", "@react-navigation/native", "@react-navigation/stack", "@expo/vector-icons"],
+    "file": "App.tsx",
+    "instructions": "📱 Build cross-platform mobile applications with React Native and Expo. Use for: iOS/Android/Web apps, rapid mobile prototyping, native mobile features, TypeScript development, navigation with React Navigation, and modern mobile UI components. Includes comprehensive testing setup, interactive examples, and platform-specific optimizations. Perfect for creating mobile apps that run on multiple platforms from a single codebase. Development server runs on port 19000 with hot reload and live preview.",
+    "port": 19000,
+    "ready_cmd": "curl -f http://localhost:19000 || exit 1"
   }
 }

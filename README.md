@@ -40,6 +40,28 @@
 | **Flask API** | REST APIs, microservices, web backends | 5000 | Flask, Gunicorn, Flask-CORS |
 | **Code Interpreter** | Data analysis, calculations, visualizations | - | Python, Jupyter, Scientific libraries |
 
+### **🔥 New Templates (2024-2025)** 🚧
+
+| Template | Use Case | Port | Technologies | Status |
+|----------|----------|------|-------------|--------|
+| **MLOps FastAPI** | ML model deployment, data pipelines, monitoring | 8080 | FastAPI, MLflow, DVC, Evidently | 🚧 In Progress |
+| **React Native Expo** | Cross-platform mobile apps, rapid prototyping | 19000 | React Native, Expo, TypeScript | 📋 Planned |
+| **Svelte/SvelteKit** | High-performance web apps, SSR | 5173 | Svelte, SvelteKit, Vite | 📋 Planned |
+| **Solidity Hardhat** | Smart contracts, DApps, Web3 development | 8545 | Solidity, Hardhat, Ethers.js | 📋 Planned |
+| **Kubernetes DevOps** | Container orchestration, microservices | 8080 | Kubernetes, Helm, Docker | 📋 Planned |
+| **Flutter Developer** | Cross-platform mobile apps, native performance | 3000 | Flutter, Dart, Material UI | 📋 Planned |
+| **Data Engineering** | ETL pipelines, data processing, analytics | 8501 | Apache Airflow, Spark, Pandas | 📋 Planned |
+| **NestJS Enterprise** | Enterprise APIs, microservices architecture | 3000 | NestJS, TypeScript, GraphQL | 📋 Planned |
+
+### **🎯 Specialized Templates** 🎮
+
+| Template | Use Case | Port | Technologies | Status |
+|----------|----------|------|-------------|--------|
+| **Discord Bot** | Bot development, automation, communities | 3001 | Discord.js, Node.js, TypeScript | 📋 Planned |
+| **Chrome Extension** | Browser extensions, web automation | 3000 | Manifest V3, TypeScript, React | 📋 Planned |
+| **Game Development** | Unity scripts, game mechanics, prototyping | 7777 | Unity, C#, Game Engine | 📋 Planned |
+| **Go Microservice** | High-performance APIs, cloud-native | 8080 | Go, gRPC, Docker, Kubernetes | 📋 Planned |
+
 ## 🚀 Quick Start
 
 ### Prerequisites

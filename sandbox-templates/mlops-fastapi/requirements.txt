@@ -1,0 +1,49 @@
+# 🤖 MLOps FastAPI Template Dependencies
+# Core ML and API dependencies for production deployment
+
+# Web Framework
+fastapi==0.104.1
+uvicorn[standard]==0.24.0
+
+# ML Libraries
+scikit-learn==1.3.2
+pandas==2.1.3
+numpy==1.25.2
+joblib==1.3.2
+
+# MLOps Tools
+mlflow==2.8.1
+dvc==3.32.1
+evidently==0.4.11
+
+# Data Validation & Monitoring
+pydantic==2.5.0
+pydantic-settings==2.1.0
+
+# HTTP Client & Utilities
+httpx==0.25.2
+python-multipart==0.0.6
+
+# Logging & Monitoring
+structlog==23.2.0
+prometheus-client==0.19.0
+
+# Development & Testing
+pytest==7.4.3
+pytest-asyncio==0.21.1
+
+# Database (optional)
+sqlalchemy==2.0.23
+psycopg2-binary==2.9.9
+
+# File handling
+aiofiles==23.2.1
+
+# Security
+python-jose[cryptography]==3.3.0
+passlib[bcrypt]==1.7.4
+
+# TODO: Add specific ML model dependencies based on use case
+# tensorflow==2.14.0
+# torch==2.1.0
+# transformers==4.35.2

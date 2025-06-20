@@ -1,0 +1,22 @@
+# ⚡ SvelteKit Template Configuration
+# E2B sandbox template for modern web development with Svelte
+
+dockerfile = "e2b.Dockerfile"
+template_name = "svelte-sveltekit"
+template_id = "svelte-sveltekit-2024"
+start_cmd = "cd /home/user && npm run dev"
+
+# Resource allocation for web development
+cpu_count = 2
+memory_mb = 2048
+
+# Team configuration
+team_id = "6083f2ec-2289-4ce2-9aae-1d84331e0c85"
+
+# Health check configuration for SvelteKit dev server
+[health_check]
+command = "curl -f http://localhost:5173 || exit 1"
+interval = 30
+timeout = 15
+retries = 3
+start_period = 15  # SvelteKit starts faster than mobile

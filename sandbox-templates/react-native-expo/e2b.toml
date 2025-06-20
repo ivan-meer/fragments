@@ -1,0 +1,22 @@
+# 📱 React Native Expo Template Configuration
+# E2B sandbox template for cross-platform mobile app development
+
+dockerfile = "e2b.Dockerfile"
+template_name = "react-native-expo"
+template_id = "react-native-expo-2024"
+start_cmd = "cd /home/user && npm start"
+
+# Resource allocation for mobile development
+cpu_count = 2
+memory_mb = 3072  # More memory for mobile compilation
+
+# Team configuration
+team_id = "6083f2ec-2289-4ce2-9aae-1d84331e0c85"
+
+# Health check configuration for Expo dev server
+[health_check]
+command = "curl -f http://localhost:19000 || exit 1"
+interval = 30
+timeout = 15
+retries = 3
+start_period = 30  # Expo takes longer to start

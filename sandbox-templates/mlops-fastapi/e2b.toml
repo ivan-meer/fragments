@@ -1,0 +1,22 @@
+# 🤖 MLOps FastAPI Template Configuration
+# E2B sandbox template for ML model deployment and monitoring
+
+dockerfile = "e2b.Dockerfile"
+template_name = "mlops-fastapi"
+template_id = "mlops-fastapi-2024"
+start_cmd = "cd /home/user && uvicorn app:app --host 0.0.0.0 --port 8080 --reload"
+
+# Resource allocation
+cpu_count = 2
+memory_mb = 2048
+
+# Team configuration
+team_id = "6083f2ec-2289-4ce2-9aae-1d84331e0c85"
+
+# Health check configuration
+[health_check]
+command = "curl -f http://localhost:8080/health || exit 1"
+interval = 30
+timeout = 10
+retries = 3
+start_period = 15

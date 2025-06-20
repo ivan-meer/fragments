@@ -43,7 +43,7 @@ export function Preview({
   const isLinkAvailable = result?.template !== 'code-interpreter-v1'
 
   return (
-    <div className="absolute md:relative z-10 top-0 left-0 shadow-2xl md:rounded-tl-3xl md:rounded-bl-3xl md:border-l md:border-y bg-popover h-full w-full overflow-auto">
+    <div className="absolute md:relative z-10 top-0 left-0 shadow-2xl md:rounded-tl-3xl md:rounded-bl-3xl md:border-l md:border-y bg-popover h-full w-full overflow-auto transition-all duration-500 animate-in slide-in-from-right-full md:slide-in-from-right-1/2">
       <Tabs
         value={selectedTab}
         onValueChange={(value) =>
@@ -51,7 +51,7 @@ export function Preview({
         }
         className="h-full flex flex-col items-start justify-start"
       >
-        <div className="w-full p-2 grid grid-cols-3 items-center border-b">
+        <div className="w-full p-2 grid grid-cols-3 items-center border-b backdrop-blur-sm bg-popover/80">
           <TooltipProvider>
             <Tooltip delayDuration={0}>
               <TooltipTrigger asChild>
@@ -68,9 +68,9 @@ export function Preview({
             </Tooltip>
           </TooltipProvider>
           <div className="flex justify-center">
-            <TabsList className="px-1 py-0 border h-8">
+            <TabsList className="px-1 py-0 border h-8 bg-background/50 backdrop-blur-sm hover:bg-background/70 transition-all duration-200">
               <TabsTrigger
-                className="font-normal text-xs py-1 px-2 gap-1 flex items-center"
+                className="font-normal text-xs py-1 px-2 gap-1 flex items-center transition-all duration-200 hover:bg-[#ff8800]/10 data-[state=active]:bg-gradient-to-r data-[state=active]:from-[#ff8800] data-[state=active]:to-[#ff6600] data-[state=active]:text-white"
                 value="code"
               >
                 {isChatLoading && (
@@ -83,7 +83,7 @@ export function Preview({
               </TabsTrigger>
               <TabsTrigger
                 disabled={!result}
-                className="font-normal text-xs py-1 px-2 gap-1 flex items-center"
+                className="font-normal text-xs py-1 px-2 gap-1 flex items-center transition-all duration-200 hover:bg-[#ff8800]/10 data-[state=active]:bg-gradient-to-r data-[state=active]:from-[#ff8800] data-[state=active]:to-[#ff6600] data-[state=active]:text-white disabled:opacity-50"
                 value="fragment"
               >
                 Preview

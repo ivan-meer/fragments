@@ -175,9 +175,9 @@ export function ChatInput({
       <div className="relative">
         <RepoBanner className="absolute bottom-full inset-x-2 translate-y-1 z-0 pb-2" />
         <div
-          className={`shadow-md rounded-2xl relative z-10 bg-background border ${
+          className={`shadow-md rounded-2xl relative z-10 bg-background border transition-all duration-300 hover:shadow-xl hover:shadow-[#ff8800]/10 hover:border-[#ff8800]/30 ${
             dragActive
-              ? 'before:absolute before:inset-0 before:rounded-2xl before:border-2 before:border-dashed before:border-primary'
+              ? 'before:absolute before:inset-0 before:rounded-2xl before:border-2 before:border-dashed before:border-[#ff8800] before:animate-pulse scale-[1.02]'
               : ''
           }`}
         >
@@ -186,7 +186,7 @@ export function ChatInput({
             autoFocus={true}
             minRows={1}
             maxRows={5}
-            className="text-normal px-3 resize-none ring-0 bg-inherit w-full m-0 outline-none"
+            className="text-normal px-3 resize-none ring-0 bg-inherit w-full m-0 outline-none transition-all duration-200 focus:bg-gradient-to-r focus:from-transparent focus:to-[#ff8800]/5"
             required={true}
             placeholder="Describe your app..."
             disabled={isErrored}
@@ -271,7 +271,7 @@ export function ChatInput({
       </div>
       <p className="text-xs text-muted-foreground mt-2 text-center">
         Fragments is an open-source project made by{' '}
-        <a href="https://e2b.dev" target="_blank" className="text-[#ff8800]">
+        <a href="https://e2b.dev" target="_blank" className="text-[#ff8800] hover:text-[#ff6600] transition-colors duration-200 hover:underline">
           ✶ E2B
         </a>
       </p>

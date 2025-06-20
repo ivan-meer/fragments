@@ -27,6 +27,7 @@ yarn-error.log*
 
 # local env files
 .env*.local
+.env
 
 # vercel
 .vercel
@@ -34,4 +35,23 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
-*.env
+
+# Security: Убедимся что все env файлы игнорируются
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+.env.production
+
+# Backup и временные файлы
+*.backup
+*.bak
+*.tmp
+.DS_Store
+.vscode/
+.idea/
+
+# Логи безопасности
+security.log
+audit.log

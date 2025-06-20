@@ -263,7 +263,12 @@ export default function Home() {
   }
 
   return (
-    <main className="flex min-h-screen max-h-screen">
+    <main className="flex min-h-screen max-h-screen bg-gradient-to-br from-background via-background to-background/95 relative overflow-hidden">
+      {/* Background Animation */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-gradient-to-r from-[#ff8800]/5 to-[#ff6600]/5 rounded-full blur-3xl animate-pulse" />
+        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-gradient-to-r from-[#ff6600]/5 to-[#ff8800]/5 rounded-full blur-3xl animate-pulse" style={{animationDelay: '2s'}} />
+      </div>
       {supabase && (
         <AuthDialog
           open={isAuthDialogOpen}
@@ -274,7 +279,7 @@ export default function Home() {
       )}
       <div className="grid w-full md:grid-cols-2">
         <div
-          className={`flex flex-col w-full max-h-full max-w-[800px] mx-auto px-4 overflow-auto ${fragment ? 'col-span-1' : 'col-span-2'}`}
+          className={`flex flex-col w-full max-h-full max-w-[800px] mx-auto px-4 overflow-auto transition-all duration-500 ease-in-out relative z-10 ${fragment ? 'col-span-1' : 'col-span-2'}`}
         >
           <NavBar
             session={session}

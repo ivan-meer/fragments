@@ -29,17 +29,17 @@ export function ChatPicker({
   onLanguageModelChange: (config: LLMModelConfig) => void
 }) {
   return (
-    <div className="flex items-center space-x-2">
+    <div className="flex items-center space-x-2 animate-in fade-in-0 duration-300">
       <div className="flex flex-col">
         <Select
           name="template"
           defaultValue={selectedTemplate}
           onValueChange={onSelectedTemplateChange}
         >
-          <SelectTrigger className="whitespace-nowrap border-none shadow-none focus:ring-0 px-0 py-0 h-6 text-xs">
+          <SelectTrigger className="whitespace-nowrap border-none shadow-none focus:ring-0 px-0 py-0 h-6 text-xs transition-all duration-200 hover:text-[#ff8800] hover:scale-105">
             <SelectValue placeholder="Select a persona" />
           </SelectTrigger>
-          <SelectContent side="top">
+          <SelectContent side="top" className="animate-in slide-in-from-bottom-4 duration-200">
             <SelectGroup>
               <SelectLabel>Persona</SelectLabel>
               <SelectItem value="auto">
@@ -76,10 +76,10 @@ export function ChatPicker({
           defaultValue={languageModel.model}
           onValueChange={(e) => onLanguageModelChange({ model: e })}
         >
-          <SelectTrigger className="whitespace-nowrap border-none shadow-none focus:ring-0 px-0 py-0 h-6 text-xs">
+          <SelectTrigger className="whitespace-nowrap border-none shadow-none focus:ring-0 px-0 py-0 h-6 text-xs transition-all duration-200 hover:text-[#ff8800] hover:scale-105">
             <SelectValue placeholder="Language model" />
           </SelectTrigger>
-          <SelectContent>
+          <SelectContent className="animate-in slide-in-from-bottom-4 duration-200">
             {Object.entries(
               Object.groupBy(models, ({ provider }) => provider),
             ).map(([provider, models]) => (

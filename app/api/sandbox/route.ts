@@ -3,6 +3,7 @@ import { ExecutionResultInterpreter, ExecutionResultWeb } from '@/lib/types'
 import { Sandbox } from '@e2b/code-interpreter'
 import { loadTemplates } from '@/lib/loadTemplates'
 import type { Templates } from '@/lib/templates'
+import { logger, logError, logInfo, logSecurity } from '@/lib/logger'
 import path from 'path'
 import fs from 'fs'
 import toml from 'toml'
@@ -27,14 +28,19 @@ export async function POST(req: Request) {
     teamID: string | undefined
     accessToken: string | undefined
   } = await req.json()
-  console.log('fragment', fragment)
-  console.log('userID', userID)
-  // console.log('apiKey', apiKey)
+  logInfo('Sandbox creation requested', { 
+    template: fragment.template,
+    hasCode: !!fragment.code,
+    codeFilesCount: fragment.code?.length || 0
+  }, userID)
 
   // Проверка доступности шаблона
   const templateName = fragment.template as keyof typeof templates
   if (!templates[templateName]) {
-    console.error(`Template not found: ${fragment.template}`)
+    logError(`Template not found: ${fragment.template}`, { 
+      requestedTemplate: fragment.template,
+      availableTemplates: Object.keys(templates)
+    }, userID)
     return new Response(
       JSON.stringify({ error: `Template ${fragment.template} not found` }),
       { status: 404 }
@@ -47,47 +53,83 @@ export async function POST(req: Request) {
   const templateId = templateConfig.template_id
 
   // Create an interpreter or a sandbox
-  const sbx = await Sandbox.create(templateId, {
-    metadata: {
-      template: templateId,
-      userID: userID ?? '',
-      teamID: teamID ?? '',
-    },
-    timeoutMs: sandboxTimeout,
-    ...(teamID && accessToken
-      ? {
-          headers: {
-            'X-Supabase-Team': teamID,
-            'X-Supabase-Token': accessToken,
-          },
-        }
-      : {}),
-  })
-
-  // Install packages
-  if (fragment.has_additional_dependencies) {
-    await sbx.commands.run(fragment.install_dependencies_command)
-    console.log(
-      `Installed dependencies: ${fragment.additional_dependencies.join(', ')} in sandbox ${sbx.sandboxId}`,
+  let sbx: Sandbox
+  try {
+    logInfo('Creating sandbox', { templateId, teamID: !!teamID }, userID)
+    sbx = await Sandbox.create(templateId, {
+      metadata: {
+        template: templateId,
+        userID: userID ?? '',
+        teamID: teamID ?? '',
+      },
+      timeoutMs: sandboxTimeout,
+      ...(teamID && accessToken
+        ? {
+            headers: {
+              'X-Supabase-Team': teamID,
+              'X-Supabase-Token': accessToken,
+            },
+          }
+        : {}),
+    })
+    logInfo('Sandbox created successfully', { sandboxId: sbx.sandboxId }, userID)
+  } catch (error) {
+    logError('Failed to create sandbox', error, userID)
+    return new Response(
+      JSON.stringify({ error: 'Failed to create sandbox', details: error instanceof Error ? error.message : 'Unknown error' }),
+      { status: 500 }
     )
   }
 
+  // Install packages
+  if (fragment.has_additional_dependencies) {
+    try {
+      logInfo('Installing additional dependencies', { 
+        dependencies: fragment.additional_dependencies,
+        command: fragment.install_dependencies_command 
+      }, userID)
+      await sbx.commands.run(fragment.install_dependencies_command)
+      logInfo('Dependencies installed successfully', { 
+        dependencies: fragment.additional_dependencies.join(', '),
+        sandboxId: sbx.sandboxId 
+      }, userID)
+    } catch (error) {
+      logError('Failed to install dependencies', error, userID)
+      // Продолжаем выполнение, но логируем ошибку
+    }
+  }
+
   // Copy code to fs
-  if (fragment.code && Array.isArray(fragment.code)) {
-    await Promise.all(
-      fragment.code.map(async (file) => {
-        await sbx.files.write(file.file_path, file.file_content)
-        console.log(`Copied file to ${file.file_path} in ${sbx.sandboxId}`)
-      })
+  try {
+    if (fragment.code && Array.isArray(fragment.code)) {
+      logInfo('Copying multiple files to sandbox', { fileCount: fragment.code.length }, userID)
+      await Promise.all(
+        fragment.code.map(async (file) => {
+          await sbx.files.write(file.file_path, file.file_content)
+          logger.debug(`Copied file to ${file.file_path}`, { sandboxId: sbx.sandboxId }, userID)
+        })
+      )
+    } else {
+      logInfo('Copying single file to sandbox', { filePath: fragment.file_path }, userID)
+      await sbx.files.write(fragment.file_path, fragment.code)
+      logger.debug(`Copied file to ${fragment.file_path}`, { sandboxId: sbx.sandboxId }, userID)
+    }
+    logInfo('All files copied successfully', { sandboxId: sbx.sandboxId }, userID)
+  } catch (error) {
+    logError('Failed to copy files to sandbox', error, userID)
+    return new Response(
+      JSON.stringify({ error: 'Failed to copy files to sandbox' }),
+      { status: 500 }
     )
-  } else {
-    await sbx.files.write(fragment.file_path, fragment.code)
-    console.log(`Copied file to ${fragment.file_path} in ${sbx.sandboxId}`)
   }
 
   // Start the application for web templates using E2B built-in mechanisms
   if (fragment.template !== 'code-interpreter-v1' && fragment.port) {
-    console.log(`Starting application for template: ${fragment.template} on port: ${fragment.port}`)
+    logInfo('Starting web application', { 
+      template: fragment.template, 
+      port: fragment.port,
+      sandboxId: sbx.sandboxId 
+    }, userID)
     
     // E2B templates should auto-start via start_cmd in e2b.toml
     // We just need to wait and verify the application is running
